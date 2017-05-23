@@ -15,47 +15,48 @@ function init() {
 	document.body.style.overflow = "hidden";
 
 	scene = new THREE.Scene();
-
-			
-			
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
 	scene.add(camera);
 	camera.position.z = 320;
 	geometry = new THREE.BoxGeometry( 200, 200, 200 );
 	material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
-
+	//box geometrisi ve meterial birleştirildi .
 	mesh = new THREE.Mesh( geometry, material );
-	scene.add( mesh );
-	
+	scene.add( mesh );// sahneye eklendi.
+
 	//silindirin ucununda toplayarak koni yapımı
 	geometry2 = new THREE.CylinderGeometry(100, 1, 102, 40, false);
 	material2 = new THREE.MeshBasicMaterial( {color: 0xffff00 , wireframe:true} );
 	cylinder = new THREE.Mesh( geometry2, material2 );
-	scene.add( cylinder );
-	
-	
+	scene.add( cylinder );//sahneye ekledik.
+
+
 
 	renderer = new THREE.WebGLRenderer();
-	renderer.setSize( window.innerWidth, window.innerHeight);
+	renderer.setSize( window.innerWidth, window.innerHeight);// tam ekran render edildi.
 
-	document.body.appendChild( renderer.domElement );
-	document.addEventListener("keydown", onDocumentKeyDown, false); 
+	document.body.appendChild( renderer.domElement );//html dönüştü
+	document.addEventListener("keydown", onDocumentKeyDown, false);
 }
-	function onDocumentKeyDown(event){ 
+	function onDocumentKeyDown(event){
 			 	var keyCode = event.which;
-			 	//up 
+			 	//yukarı
 			 	if(keyCode == 38){
 					mesh.position.y += 10;
-			 	} //down
+					cylinder.position.y+=10;
+			 	} //aşağı
 			 	if(keyCode == 40) {
 			 		mesh.position.y -= 10;
-			 	} 
+					cylinder.position.y -=10;
+			 	}//sola
 				if(keyCode == 37) {
 					mesh.position.x -= 10;
+					cylinder.position.x -=10;
 				}
-				
+				//sağa
 				if(keyCode == 39) {
 					mesh.position.x += 10;
+					cylinder.position.x +=10;
 				}
 			 }
 
@@ -66,7 +67,7 @@ function animate() {
 
 	mesh.rotation.x += 0.01;
 	mesh.rotation.y += 0.02;
-	
+
 	cylinder.rotation.x += 0.02;
 	cylinder.rotation.y +=0.01;
 
@@ -76,4 +77,3 @@ function animate() {
 </script>
 </body>
 </html>
-
