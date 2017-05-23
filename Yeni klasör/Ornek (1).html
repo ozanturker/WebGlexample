@@ -1,10 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <body>
-<p>Baþlýk...</p>
 <script src="three.min.js">
 </script>
-
 <script>
 var scene, camera, renderer;
 var geometry,geometry2, material,material2, mesh, cylinder;
@@ -14,29 +12,53 @@ animate();
 
 function init() {
 
+	document.body.style.overflow = "hidden";
+
 	scene = new THREE.Scene();
 
+			
+			
 	camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-	camera.position.z = 1000;
-
+	scene.add(camera);
+	camera.position.z = 320;
 	geometry = new THREE.BoxGeometry( 200, 200, 200 );
 	material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
 
 	mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
 	
-	//silindirin ucununda toplayarak koni yapýmý
+	//silindirin ucununda toplayarak koni yapÄ±mÄ±
 	geometry2 = new THREE.CylinderGeometry(100, 1, 102, 40, false);
 	material2 = new THREE.MeshBasicMaterial( {color: 0xffff00 , wireframe:true} );
 	cylinder = new THREE.Mesh( geometry2, material2 );
 	scene.add( cylinder );
+	
+	
 
 	renderer = new THREE.WebGLRenderer();
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( window.innerWidth, window.innerHeight);
 
 	document.body.appendChild( renderer.domElement );
-
+	document.addEventListener("keydown", onDocumentKeyDown, false); 
 }
+	function onDocumentKeyDown(event){ 
+			 	var keyCode = event.which;
+			 	//up 
+			 	if(keyCode == 38){
+					mesh.position.y += 10;
+			 	} //down
+			 	if(keyCode == 40) {
+			 		mesh.position.y -= 10;
+			 	} 
+				if(keyCode == 37) {
+					mesh.position.x -= 10;
+				}
+				
+				if(keyCode == 39) {
+					mesh.position.x += 10;
+				}
+			 }
+
 
 function animate() {
 
@@ -52,7 +74,6 @@ function animate() {
 
 }
 </script>
-
-<p>...Dipnot</p>
 </body>
 </html>
+
